@@ -4,6 +4,8 @@ AVAILABLE_DENOMINATIONS = [500.00, 200.00, 100.00, 50.00, 20.00, 10.00,
                            5.00, 2.00, 1.00, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01]
 
 
+# TODO:
+
 def main() -> int:
     denominations = [500.00, 200.00, 100.00, 50.00, 20.00, 10.00, 5.00, 2.00, 1.00, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01]
 
@@ -13,21 +15,17 @@ def main() -> int:
 
         if command == "exit":
             return 0
-
-        if command == "add":
+        elif command == "add":
             denominations = add_denominations(denominations, *args, AVAILABLE_DENOMINATIONS)
-
-        if command == "remove":
+        elif command == "remove":
             denominations = remove_denominations(denominations, *args)
-
-        if command == "change":
+        elif command == "change":
             display_change_results(denominations, args)
-
-        if command == "list":
+        elif command == "list":
             print(denominations)
-
-        if command == "help":
+        else:
             help()
+
 
 # converting string to float exception handling
 def string_to_float(*args: List[str]) -> List[float]:
