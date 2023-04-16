@@ -3,6 +3,7 @@
 /workspace.xml
 /.idea/
 /venv/
+/__pycache__/
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files

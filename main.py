@@ -1,4 +1,6 @@
 from typing import List, Union, Tuple, Dict
+from utils import *
+
 
 AVAILABLE_DENOMINATIONS = [500.00, 200.00, 100.00, 50.00, 20.00, 10.00,
                            5.00, 2.00, 1.00, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01]
@@ -27,17 +29,6 @@ def main() -> int:
             help()
 
 
-# converting string to float exception handling
-def string_to_float(*args: List[str]) -> List[float]:
-    float_list: List[float] = []
-    for arg in args:
-        try:
-            float_list.append(float(arg.replace(',', '.')))
-        except ValueError:
-            print("Only numbers as arguments")
-    return float_list
-
-
 def user_input() -> Tuple[str, List[float]]:
     user_input: str = input(">")
     input_list: List[str] = user_input.split()
@@ -64,14 +55,6 @@ def add_denominations(denominations: List[float], *args: List[float], default_de
 
 
 def display_change_results(denominations: List[float], args: List[float]) -> None:
-    def has_only_two_decimal_places(num: float) -> bool:
-        return len(str(num).split('.')[1]) <= 2
-
-    def round_to_two_decimal(arg: float) -> float:
-        rounded_arg = round(arg, 2)
-        print(f"Warning: Your input {arg} has been rounded to MIN two decimal places: {rounded_arg}.")
-        return rounded_arg
-
     def calculate_change(denominations: List[float], total_change: float) -> dict:
         change_dict = {}
         for denom in denominations:
@@ -82,7 +65,7 @@ def display_change_results(denominations: List[float], args: List[float]) -> Non
         return change_dict
 
     for arg in args:
-        if has_only_two_decimal_places(arg):
+        if not has_only_two_decimal_places(arg):
             arg = round_to_two_decimal(arg)
         change_dict = calculate_change(denominations, arg)
         print(f"For {arg} change, you need:")
